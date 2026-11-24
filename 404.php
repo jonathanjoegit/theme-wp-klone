@@ -1,0 +1,1 @@
+<?php get_header(); ?><div class="page-wrap"><p class="eyebrow">Erreur 404</p><h1 class="page-title">Page introuvable</h1><p><a class="button" href="<?php echo esc_url( home_url( '/' ) ); ?>">Retour à l’accueil</a></p></div><?php get_footer(); ?>
