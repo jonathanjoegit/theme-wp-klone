@@ -2,7 +2,7 @@
 Theme Name: KLONE
 Author: KLONE
 Description: Thème WordPress pour le site officiel de KLONE, adapté du thème Klonosphere.
-Version: 1.4.0
+Version: 1.5.0
 Requires at least: 6.3
 Requires PHP: 7.4
 License: Proprietary
@@ -100,12 +100,13 @@ button { cursor: pointer; }
 .notice { margin: 16px 0 0; color: #999da2; font-size: 12px; }
 
 .tour-section { background: linear-gradient(145deg,#111923,#080b11); }
-.tour-inner { display: grid; grid-template-columns: minmax(0,1fr); gap: 22px; }
+.tour-inner { display: grid; grid-template-columns: minmax(0,1fr) !important; gap: 22px; }
+.tour-inner > * { grid-column: 1 / -1; min-width: 0; width: 100%; }
 .store-inner { display: flex; flex-direction: column; align-items: stretch; gap: 22px; }
 .tour-inner > div:first-child, .store-inner > div { max-width: 720px; }
 .tour-inner h2, .store-inner h2 { margin-bottom: 20px; }
 .tour-inner p, .store-inner p { max-width: 620px; margin-bottom: 20px; color: #c5c3c5; }
-.tour-status { width: 100%; max-width: none; padding: 0; border: 0; background: transparent !important; box-shadow: none; }
+.tour-status { display: block; width: 100%; max-width: none; padding: 0; border: 0; background: transparent !important; box-shadow: none; }
 .tour-status strong { font: 700 18px 'Barlow Condensed',sans-serif; letter-spacing: .07em; }
 .tour-status p { margin: 9px 0 18px; color: #d6d5d6; }
 .store-section { background: #11131a; }
@@ -116,7 +117,8 @@ button { cursor: pointer; }
 .newsletter-note { display: inline-block; max-width: 650px; margin: 10px auto 0; padding: 10px 14px; border: 1px solid #ffffff42; color: #b8b8b8 !important; font-size: 12px; }
 .newsletter-embed { width: min(100%, 680px); margin: 24px auto 0; text-align: left; }
 .newsletter-embed iframe { width: 100%; max-width: 100%; border: 0; }
-.tour-embed { width: 100%; margin: 20px 0; background: transparent !important; box-shadow: none; }
+.tour-embed { width: 100%; margin: 20px 0; background: transparent !important; box-shadow: none; color-scheme: dark; }
+.tour-embed > * { width: 100%; }
 .tour-embed :where(div,section,article,ul,li) { background-color: transparent !important; }
 .tour-embed iframe { width: 100%; max-width: 100%; border: 0; }
 
@@ -172,7 +174,7 @@ button { cursor: pointer; }
   .video-card:first-child { grid-column: span 2; }
   .video-embed:first-child { grid-column: span 2; }
   .video-card { height: 320px; }
-  .tour-inner { grid-template-columns: minmax(0,1fr); gap: 24px; }
+  .tour-inner { grid-template-columns: minmax(0,1fr) !important; gap: 24px; }
   .store-inner { flex-direction: row; align-items: center; justify-content: space-between; gap: 30px; }
   .contacts-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 24px; }
   .contact-social { margin: 0 0 30px; }

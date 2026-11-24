@@ -69,7 +69,7 @@ $tracks = array_filter( array_map( 'trim', preg_split( '/\r\n|\r|\n/', klone_opt
 <section class="section tour-section" id="tour"><div class="wrap tour-inner">
 	<div><p class="eyebrow"><?php echo esc_html( klone_option( 'tour_eyebrow', '03 / On the road' ) ); ?></p><h2><?php echo esc_html( klone_option( 'tour_heading', 'Tour Dates' ) ); ?></h2><p><?php echo esc_html( klone_option( 'tour_intro', 'Upcoming shows, cities and ticket information.' ) ); ?></p></div>
 	<div class="tour-status"><strong><?php echo esc_html( klone_option( 'tour_status', '2026 / 2027 — SHOW ANNOUNCEMENTS COMING SOON' ) ); ?></strong><p><?php echo esc_html( klone_option( 'tour_description', 'Confirmed concerts and official ticket links will appear here once the touring schedule is validated.' ) ); ?></p>
-		<?php $songkick_html = klone_option( 'tour_embed_html', '' ); if ( $songkick_html ) : ?><div class="tour-embed"><?php echo $songkick_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Admin/editor-provided Songkick widget code. ?></div><?php endif; ?>
+		<?php $songkick_html = klone_songkick_markup( klone_option( 'tour_embed_html', '' ) ); if ( $songkick_html ) : ?><div class="tour-embed"><?php echo $songkick_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Admin/editor-provided Songkick widget code with the dark palette enforced. ?></div><?php endif; ?>
 		<a class="button button-outline" href="<?php echo esc_url( klone_option( 'tour_url', 'https://www.songkick.com/artists/487951-klone' ) ); ?>" target="_blank" rel="noopener noreferrer"><?php echo esc_html( klone_option( 'tour_button', 'Get tour updates' ) ); ?> ↗</a>
 	</div>
 </div></section>

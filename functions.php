@@ -36,6 +36,27 @@ function klone_link_option( $key, $default = '' ) {
 function klone_sanitize_embed_markup( $value ) {
 	return is_string( $value ) ? trim( $value ) : '';
 }
+/** Make Songkick's embedded widget use the site's dark palette, including previously saved embed code. */
+function klone_songkick_markup( $markup ) {
+	if ( ! is_string( $markup ) || '' === trim( $markup ) ) { return ''; }
+	$attributes = array(
+		'data-theme' => 'dark',
+		'data-detect-style' => 'off',
+		'data-background-color' => 'rgba(8,11,16,1)',
+		'data-font-color' => 'rgba(243,240,236,1)',
+		'data-button-bg-color' => 'rgba(181,155,100,1)',
+		'data-button-text-color' => 'rgba(8,11,16,1)',
+	);
+	foreach ( $attributes as $name => $value ) {
+		$quoted_name = preg_quote( $name, '/' );
+		if ( preg_match( '/\\b' . $quoted_name . '\\s*=\\s*"[^"]*"/i', $markup ) ) {
+			$markup = preg_replace( '/\\b' . $quoted_name . '\\s*=\\s*"[^"]*"/i', $name . '="' . $value . '"', $markup, 1 );
+		} else {
+			$markup = preg_replace( '/<a\\b/i', '<a ' . $name . '="' . $value . '"', $markup, 1 );
+		}
+	}
+	return $markup;
+}
 function klone_youtube_video_id( $url ) {
 	$host = strtolower( (string) wp_parse_url( $url, PHP_URL_HOST ) );
 	$path = (string) wp_parse_url( $url, PHP_URL_PATH );
@@ -151,7 +172,7 @@ function klone_content_fields() {
 			'tour_eyebrow' => array( 'Petit titre', 'text', '03 / On the road' ), 'tour_heading' => array( 'Titre de section', 'text', 'Tour Dates' ), 'tour_intro' => array( 'Texte à côté du titre', 'textarea', 'Upcoming shows, cities and ticket information.' ),
 			'tour_status' => array( 'Message / statut', 'text', '2026 / 2027 — SHOW ANNOUNCEMENTS COMING SOON' ), 'tour_description' => array( 'Texte sous le statut', 'textarea', 'Confirmed concerts and official ticket links will appear here once the touring schedule is validated.' ),
 			'tour_button' => array( 'Texte du bouton', 'text', 'Get tour updates' ), 'tour_url' => array( 'Lien vers Songkick', 'url', 'https://www.songkick.com/artists/487951-klone' ),
-			'tour_embed_html' => array( 'Code HTML Songkick', 'html', '<a href="https://www.songkick.com/artists/487951-klone" class="songkick-widget" data-theme="dark" data-track-button="on" data-detect-style="on" data-locale="en" data-other-artists="on" data-share-button="on" data-country-filter="on" data-rsvp="on" data-request-show="on" data-past-events="on" data-past-events-offtour="on" data-remind-me="off" style="display:none;"></a><script src="//widget-app.songkick.com/injector/10240683"></script>' ),
+			'tour_embed_html' => array( 'Code HTML Songkick', 'html', '<a href="https://www.songkick.com/artists/487951-klone" class="songkick-widget" data-theme="dark" data-track-button="on" data-detect-style="off" data-background-color="rgba(8,11,16,1)" data-font-color="rgba(243,240,236,1)" data-button-bg-color="rgba(181,155,100,1)" data-button-text-color="rgba(8,11,16,1)" data-locale="en" data-other-artists="on" data-share-button="on" data-country-filter="on" data-rsvp="on" data-request-show="on" data-past-events="on" data-past-events-offtour="on" data-remind-me="off" style="display:none;"></a><script src="//widget-app.songkick.com/injector/10240683"></script>' ),
 		) ),
 		'store' => array( 'Boutique externe', array(
 			'store_eyebrow' => array( 'Petit titre', 'text', '04 / Official merch' ), 'store_heading' => array( 'Titre de section', 'text', 'Store' ), 'store_description' => array( 'Texte de la section', 'textarea', 'Records, vinyl and official KLONE apparel.' ), 'store_button' => array( 'Texte du bouton (section)', 'text', 'Visit the store' ),
