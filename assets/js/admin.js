@@ -8,6 +8,7 @@
 		var frame = wp.media({ title: 'Choisir une image', button: { text: 'Utiliser cette image' }, multiple: false });
 		frame.on('select', function () {
 			var attachment = frame.state().get('selection').first().toJSON();
+			field.val(attachment.url);
 			preview.attr('src', attachment.url).show();
 		});
 		frame.open();
